@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="format-detection" content="telephone=no">
+  <title>BodyWorks Massage Therapy — Beaver, PA</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg-white: #ffffff;
+      --text: #000000;
+      --muted: #545454;
+      --accent-1: #f5a3b3;
+      --accent-2: #f8cda2;
+      --accent-3: #9ad8e3;
+      --rule: rgba(0,0,0,0.09);
+      --container: 1180px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color:var(--text);
+      background:var(--bg-white);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.25;
+      overflow-x:hidden;
+    }
+
+    .bg {
+      position:fixed;
+      inset:0;
+      z-index:-20;
+      pointer-events:none;
+      background:
+        radial-gradient(circle at 92% 8%, rgba(255,255,255,0.55), rgba(255,255,255,0) 18%),
+        linear-gradient(120deg, var(--accent-1) 0%, var(--accent-2) 55%, var(--accent-3) 100%);
+      background-size:300% 300%;
+      opacity:0;
+      transition:opacity 1s cubic-bezier(.22,.9,.35,1) 0.45s;
+    }
+    .bg.visible{opacity:1;animation:shift 30s ease-in-out infinite;}
+
+    @keyframes shift {
+      0% {background-position:0% 50%;}
+      50% {background-position:100% 50%;}
+      100% {background-position:0% 50%;}
+    }
+
+    .top-bar{
+      max-width:var(--container);
+      margin:0 auto;
+      padding:24px 28px 0 28px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .brand{
+      font-family:"Playfair Display", serif;
+      font-weight:700;
+      font-size:26px;
+      letter-spacing:-0.01em;
+    }
+    .call-btn{
+      display:inline-block;
+      background:var(--text);
+      color:#fff;
+      text-decoration:none;
+      font-size:16px;
+      font-weight:600;
+      padding:10px 20px;
+      border-radius:50px;
+      transition:background .25s ease, transform .15s ease;
+    }
+    .call-btn:hover{
+      background:#333;
+      transform:translateY(-1px);
+    }
+
+    .hero {
+      min-height:78vh;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      padding:36px 24px 12px 24px;
+      position:relative;
+    }
+    .hero-inner{
+      width:100%;
+      max-width:var(--container);
+      padding-top:40px;
+    }
+
+    .hero-h1 {
+      font-family:"Playfair Display", Georgia, serif;
+      font-weight:900;
+      margin:0;
+      color:var(--text);
+      font-size:clamp(56px, 10vw, 160px);
+      line-height:0.92;
+      letter-spacing:-0.02em;
+    }
+    .hero-h1 .line2 {display:block; transform:translateX(8%);}
+
+    .hero-rule {
+      height:1px;
+      background:var(--rule);
+      margin:40px 0;
+    }
+
+    .content-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      position:relative;
+    }
+    .content-grid::before{
+      content:'';
+      position:absolute;
+      top:0;bottom:0;left:50%;
+      width:1px;
+      background:var(--rule);
+      transform:translateX(-0.5px);
+    }
+
+    .left-col, .right-col{padding:28px 36px 120px 36px;}
+    .left-col h2{
+      font-family:"Playfair Display", serif;
+      font-weight:700;
+      margin:0 0 12px 0;
+      font-size:28px;
+    }
+    .left-col p, .right-col p{color:var(--muted);font-size:18px;max-width:42ch;}
+    .right-col h3{font-weight:700;font-size:18px;margin:0 0 12px 0;}
+    .inline-rule{
+      height:1px;
+      width:36%;
+      background:var(--rule);
+      margin:14px 0 18px 0;
+    }
+
+    /* ===== Pricing Section ===== */
+    .pricing-section {
+      max-width:var(--container);
+      margin:0 auto;
+      padding:40px 28px 60px 28px;
+      border-top:1px solid var(--rule);
+    }
+
+    .pricing-section h2 {
+      font-family:"Playfair Display", serif;
+      font-size:32px;
+      font-weight:700;
+      margin-bottom:24px;
+    }
+
+    .pricing-table {
+      width:100%;
+      display:grid;
+      grid-template-columns:2fr 1fr 1fr 1fr;
+      row-gap:20px;
+      align-items:start;
+    }
+
+    @media (min-width: 781px) {
+      .pricing-header:nth-child(2),
+      .pricing-header:nth-child(3),
+      .pricing-header:nth-child(4) {
+        text-align: center;
+        padding-left: 12px;
+      }
+
+      .pricing-header:first-child {
+        padding-left: 36px;
+      }
+
+      .pricing-table .price {
+        text-align: center;
+      }
+    }
+
+    .pricing-header {
+      font-weight:600;
+      color:var(--muted);
+      text-transform:uppercase;
+      font-size:14px;
+      border-bottom:1px solid var(--rule);
+      padding-bottom:8px;
+    }
+
+    .pricing-type {
+      font-weight:600;
+      font-size:18px;
+      margin-bottom:6px;
+    }
+
+    .pricing-desc {
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.4;
+      max-width:50ch;
+    }
+
+    .price {
+      font-size:18px;
+      font-weight:500;
+      text-align:center;
+    }
+
+    /* ===== Our Story Section ===== */
+    .story-section {
+      max-width:var(--container);
+      margin:0 auto;
+      padding:80px 28px 100px 28px;
+      border-top:1px solid var(--rule);
+    }
+    .story-section h2 {
+      font-family:"Playfair Display", serif;
+      font-size:32px;
+      font-weight:700;
+      margin-bottom:24px;
+    }
+    .story-section p {
+      color:var(--muted);
+      font-size:18px;
+      line-height:1.6;
+      max-width:75ch;
+      margin-bottom:18px;
+    }
+
+    footer {
+      padding:48px 24px;
+      color:var(--muted);
+    }
+
+    /* Prevent auto-styled blue phone links */
+    footer a, footer a:link, footer a:visited {
+      color:inherit;
+      text-decoration:none;
+      pointer-events:none;
+      cursor:default;
+    }
+
+    /* ===== MOBILE OPTIMIZATION ===== */
+    @media (max-width:780px) {
+      .content-grid {display:block;}
+      .content-grid::before {display:none;}
+      .left-col, .right-col {padding:0 10px 60px 10px;}
+      .pricing-section, .story-section {padding:40px 20px 80px 20px;}
+      .story-section p {font-size:16px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="bg" aria-hidden="true"></div>
+
+  <main>
+    <div class="top-bar">
+      <div class="brand">BodyWorks</div>
+      <a href="tel:7247743165" class="call-btn">Call Now</a>
+    </div>
+
+    <section class="hero">
+      <div class="hero-inner">
+        <h1 class="hero-h1">
+          BodyWorks
+          <span class="line2">Massage Therapy</span>
+        </h1>
+
+        <div class="hero-rule"></div>
+
+        <div class="content-grid">
+          <div class="left-col">
+            <h2>Experience true relaxation and restorative care</h2>
+            <div class="inline-rule"></div>
+            <p>At BodyWorks Massage Therapy, we’ve been helping our Beaver community relieve stress, ease pain, and restore balance for nearly three decades. Every session is customized to your body’s needs with professionalism and care.</p>
+          </div>
+
+          <div class="right-col">
+            <h3>About the practice</h3>
+            <div class="inline-rule"></div>
+            <p>Owned and operated by <strong>Christian Bell</strong> for 29 years, BodyWorks is dedicated to promoting wellness through therapeutic touch. Located at <strong>322 Bridge St, Beaver, PA 15009</strong>. Call us today at <strong>(724) 774-3165</strong> to schedule your appointment.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pricing-section">
+      <h2>Massages & Pricing</h2>
+      <div class="pricing-table">
+        <div class="pricing-header">Type</div>
+        <div class="pricing-header">30 min</div>
+        <div class="pricing-header">60 min</div>
+        <div class="pricing-header">90 min</div>
+
+        <div>
+          <div class="pricing-type">Swedish Massage</div>
+          <div class="pricing-desc">Gentle, relaxing full-body massage that improves circulation and reduces tension.</div>
+        </div>
+        <div class="price">$45</div>
+        <div class="price">$80</div>
+        <div class="price">$110</div>
+
+        <div>
+          <div class="pricing-type">Deep Tissue Massage</div>
+          <div class="pricing-desc">Targets deeper layers of muscle to relieve chronic tension and soreness.</div>
+        </div>
+        <div class="price">$50</div>
+        <div class="price">$90</div>
+        <div class="price">$125</div>
+
+        <div>
+          <div class="pricing-type">Hot Stone Massage</div>
+          <div class="pricing-desc">Heated stones melt away stress while easing tight muscles and improving circulation.</div>
+        </div>
+        <div class="price">$55</div>
+        <div class="price">$95</div>
+        <div class="price">$135</div>
+
+        <div>
+          <div class="pricing-type">Prenatal Massage</div>
+          <div class="pricing-desc">Safe and supportive massage for expecting mothers to relieve back and hip discomfort.</div>
+        </div>
+        <div class="price">$50</div>
+        <div class="price">$85</div>
+        <div class="price">$120</div>
+      </div>
+    </section>
+
+    <!-- OUR STORY -->
+    <section class="story-section">
+      <h2>Our Story</h2>
+      <p>For 29 years, we have been a cornerstone of wellness in our community, dedicated to the healing power of touch. Our journey began in the 1990s with a simple mission: to provide a personalized, therapeutic experience that prioritizes each client's unique needs. After nearly three decades, our passion for excellence has only deepened.</p>
+      <p>We've built our reputation on a foundation of trust, expertise, and personalized care. Our therapists are masters of their craft, bringing decades of hands-on experience and a wealth of knowledge to every session. They take the time to truly listen, ensuring every treatment is tailored to address your specific goals, whether you seek relief from chronic pain, stress reduction, or simply a moment of tranquility.</p>
+      <p>From the moment you step into our calm and welcoming space, you are not just a client—you are part of our family. We cherish the relationships we've built and are honored to have witnessed multiple generations of families walk through our doors. Our longevity is a testament to the loyalty of our clients and our unwavering commitment to their well-being. We invite you to experience the difference that 29 years of passion and expertise can make.</p>
+    </section>
+
+    <footer>
+      <div style="max-width:var(--container); margin:0 auto; padding:0 28px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap;">
+          <div style="font-weight:600; font-family:Inter, sans-serif;">BodyWorks Massage Therapy</div>
+          <div style="color:var(--muted);">322 Bridge St, Beaver, PA • (724) 774-3165</div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    window.addEventListener('load', ()=> {
+      document.querySelector('.bg').classList.add('visible');
+    });
+  </script>
+</body>
+</html>
