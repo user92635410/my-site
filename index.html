@@ -6,253 +6,452 @@
   <meta name="format-detection" content="telephone=no">
   <title>BodyWorks Massage Therapy — Beaver, PA</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg-white: #ffffff;
-      --text: #000000;
-      --muted: #545454;
-      --accent-1: #f5a3b3;
-      --accent-2: #f8cda2;
-      --accent-3: #9ad8e3;
-      --rule: rgba(0,0,0,0.09);
-      --container: 1180px;
+      --cream: #fdf8f4;
+      --text: #2a2a2a;
+      --muted: #6b6b6b;
+      --warm: #d4956a;
+      --soft-sage: #a8b8a4;
+      --stone: #8d8b7f;
+      --rule: rgba(0,0,0,0.08);
+      --container: 1140px;
     }
 
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
-      font-family:"Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      font-family:"DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
       color:var(--text);
-      background:var(--bg-white);
+      background:var(--cream);
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
-      line-height:1.25;
+      line-height:1.5;
       overflow-x:hidden;
     }
 
+    /* Warm, organic background with subtle texture */
     .bg {
       position:fixed;
       inset:0;
       z-index:-20;
       pointer-events:none;
       background:
-        radial-gradient(circle at 92% 8%, rgba(255,255,255,0.55), rgba(255,255,255,0) 18%),
-        linear-gradient(120deg, var(--accent-1) 0%, var(--accent-2) 55%, var(--accent-3) 100%);
-      background-size:300% 300%;
+        radial-gradient(circle at 15% 20%, rgba(212, 149, 106, 0.08), transparent 25%),
+        radial-gradient(circle at 85% 85%, rgba(168, 184, 164, 0.06), transparent 30%),
+        linear-gradient(135deg, var(--cream) 0%, #fbf5f1 100%);
       opacity:0;
-      transition:opacity 1s cubic-bezier(.22,.9,.35,1) 0.45s;
+      transition:opacity 0.8s cubic-bezier(.22,.9,.35,1) 0.3s;
     }
-    .bg.visible{opacity:1;animation:shift 30s ease-in-out infinite;}
+    .bg.visible{opacity:1;}
 
-    @keyframes shift {
-      0% {background-position:0% 50%;}
-      50% {background-position:100% 50%;}
-      100% {background-position:0% 50%;}
-    }
-
+    /* Top navigation */
     .top-bar{
       max-width:var(--container);
       margin:0 auto;
-      padding:24px 28px 0 28px;
+      padding:32px 32px 0 32px;
       display:flex;
       align-items:center;
       justify-content:space-between;
     }
     .brand{
-      font-family:"Playfair Display", serif;
-      font-weight:700;
-      font-size:26px;
-      letter-spacing:-0.01em;
+      font-family:"Cormorant Garamond", serif;
+      font-weight:600;
+      font-size:32px;
+      letter-spacing:0.03em;
+      color:var(--text);
     }
     .call-btn{
-      display:inline-block;
-      background:var(--text);
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      background:var(--warm);
       color:#fff;
       text-decoration:none;
-      font-size:16px;
+      font-size:15px;
       font-weight:600;
-      padding:10px 20px;
-      border-radius:50px;
-      transition:background .25s ease, transform .15s ease;
+      padding:12px 24px;
+      border-radius:6px;
+      transition:all 0.25s ease;
+      border:2px solid var(--warm);
     }
     .call-btn:hover{
-      background:#333;
-      transform:translateY(-1px);
+      background:transparent;
+      color:var(--warm);
+      transform:translateY(-2px);
     }
 
+    /* Hero section */
     .hero {
-      min-height:78vh;
+      min-height:72vh;
       display:flex;
-      align-items:flex-start;
+      align-items:center;
       justify-content:center;
-      padding:36px 24px 12px 24px;
+      padding:60px 32px 80px 32px;
       position:relative;
     }
     .hero-inner{
       width:100%;
       max-width:var(--container);
-      padding-top:40px;
     }
 
     .hero-h1 {
-      font-family:"Playfair Display", Georgia, serif;
-      font-weight:900;
-      margin:0;
+      font-family:"Cormorant Garamond", Georgia, serif;
+      font-weight:600;
+      margin:0 0 12px 0;
       color:var(--text);
-      font-size:clamp(56px, 10vw, 160px);
-      line-height:0.92;
-      letter-spacing:-0.02em;
+      font-size:clamp(48px, 8vw, 96px);
+      line-height:1;
+      letter-spacing:-0.01em;
     }
-    .hero-h1 .line2 {display:block; transform:translateX(8%);}
+    .hero-subtitle {
+      font-family:"DM Sans", sans-serif;
+      font-size:20px;
+      color:var(--muted);
+      font-weight:400;
+      margin:20px 0 40px 0;
+      max-width:55ch;
+      line-height:1.6;
+    }
 
     .hero-rule {
-      height:1px;
-      background:var(--rule);
-      margin:40px 0;
+      height:2px;
+      width:60px;
+      background:var(--warm);
+      margin-bottom:32px;
     }
 
-    .content-grid{
+    /* Two-column info grid */
+    .info-grid{
+      display:grid;
+      grid-template-columns:1.2fr 1fr;
+      gap:60px;
+      margin-top:48px;
+      padding-top:48px;
+      border-top:1px solid var(--rule);
+    }
+
+    .info-col h2{
+      font-family:"Cormorant Garamond", serif;
+      font-weight:600;
+      margin:0 0 20px 0;
+      font-size:28px;
+      color:var(--text);
+    }
+    .info-col p{
+      color:var(--muted);
+      font-size:17px;
+      line-height:1.7;
+      margin:0 0 16px 0;
+    }
+    .info-col ul{
+      list-style:none;
+      padding:0;
+      margin:0;
+    }
+    .info-col li{
+      color:var(--muted);
+      font-size:17px;
+      line-height:1.8;
+      margin-bottom:10px;
+    }
+    .info-col strong{
+      color:var(--text);
+      font-weight:600;
+    }
+
+    /* What to Expect section */
+    .expect-section {
+      max-width:var(--container);
+      margin:0 auto;
+      padding:100px 32px 80px 32px;
+      border-top:1px solid var(--rule);
+    }
+
+    .expect-section h2 {
+      font-family:"Cormorant Garamond", serif;
+      font-size:36px;
+      font-weight:600;
+      margin:0 0 16px 0;
+      color:var(--text);
+    }
+
+    .expect-intro {
+      color:var(--muted);
+      font-size:18px;
+      max-width:65ch;
+      margin-bottom:48px;
+      line-height:1.7;
+    }
+
+    .expect-grid {
       display:grid;
       grid-template-columns:1fr 1fr;
-      position:relative;
-    }
-    .content-grid::before{
-      content:'';
-      position:absolute;
-      top:0;bottom:0;left:50%;
-      width:1px;
-      background:var(--rule);
-      transform:translateX(-0.5px);
+      gap:48px;
     }
 
-    .left-col, .right-col{padding:28px 36px 120px 36px;}
-    .left-col h2{
-      font-family:"Playfair Display", serif;
-      font-weight:700;
+    .expect-item h3 {
+      font-family:"Cormorant Garamond", serif;
+      font-size:22px;
+      font-weight:600;
+      color:var(--text);
       margin:0 0 12px 0;
-      font-size:28px;
-    }
-    .left-col p, .right-col p{color:var(--muted);font-size:18px;max-width:42ch;}
-    .right-col h3{font-weight:700;font-size:18px;margin:0 0 12px 0;}
-    .inline-rule{
-      height:1px;
-      width:36%;
-      background:var(--rule);
-      margin:14px 0 18px 0;
     }
 
-    /* ===== Pricing Section ===== */
+    .expect-item p {
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.7;
+      margin:0;
+    }
+
+    .accent-line {
+      height:3px;
+      width:40px;
+      background:var(--warm);
+      margin:0 0 16px 0;
+    }
+
+    /* Amenities */
+    .amenities-section {
+      max-width:var(--container);
+      margin:0 auto;
+      padding:80px 32px 100px 32px;
+      border-top:1px solid var(--rule);
+    }
+
+    .amenities-section h2 {
+      font-family:"Cormorant Garamond", serif;
+      font-size:36px;
+      font-weight:600;
+      margin:0 0 40px 0;
+      color:var(--text);
+    }
+
+    .amenities-grid {
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:40px;
+    }
+
+    .amenity-card {
+      padding:32px;
+      background:rgba(255,255,255,0.5);
+      border:1px solid var(--rule);
+      border-radius:8px;
+      transition:all 0.3s ease;
+    }
+
+    .amenity-card:hover {
+      background:rgba(255,255,255,0.8);
+      border-color:var(--warm);
+      transform:translateY(-4px);
+    }
+
+    .amenity-card h3 {
+      font-family:"Cormorant Garamond", serif;
+      font-size:20px;
+      font-weight:600;
+      margin:0 0 12px 0;
+      color:var(--text);
+    }
+
+    .amenity-card p {
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.6;
+      margin:0;
+    }
+
+    /* Pricing Section */
     .pricing-section {
       max-width:var(--container);
       margin:0 auto;
-      padding:40px 28px 60px 28px;
+      padding:80px 32px 60px 32px;
       border-top:1px solid var(--rule);
     }
 
     .pricing-section h2 {
-      font-family:"Playfair Display", serif;
-      font-size:32px;
-      font-weight:700;
-      margin-bottom:24px;
+      font-family:"Cormorant Garamond", serif;
+      font-size:36px;
+      font-weight:600;
+      margin:0 0 40px 0;
+      color:var(--text);
     }
 
     .pricing-table {
-      width:100%;
       display:grid;
-      grid-template-columns:2fr 1fr 1fr 1fr;
-      row-gap:20px;
-      align-items:start;
-    }
-
-    @media (min-width: 781px) {
-      .pricing-header:nth-child(2),
-      .pricing-header:nth-child(3),
-      .pricing-header:nth-child(4) {
-        text-align: center;
-        padding-left: 12px;
-      }
-
-      .pricing-header:first-child {
-        padding-left: 36px;
-      }
-
-      .pricing-table .price {
-        text-align: center;
-      }
+      grid-template-columns:1fr 1fr;
+      gap:24px;
+      max-width:500px;
+      margin-bottom:24px;
     }
 
     .pricing-header {
       font-weight:600;
       color:var(--muted);
       text-transform:uppercase;
-      font-size:14px;
-      border-bottom:1px solid var(--rule);
-      padding-bottom:8px;
+      font-size:13px;
+      border-bottom:2px solid var(--warm);
+      padding-bottom:12px;
     }
 
     .pricing-type {
-      font-weight:600;
-      font-size:18px;
-      margin-bottom:6px;
-    }
-
-    .pricing-desc {
-      color:var(--muted);
-      font-size:15px;
-      line-height:1.4;
-      max-width:50ch;
+      font-size:17px;
+      font-weight:500;
+      color:var(--text);
+      padding-bottom:8px;
     }
 
     .price {
       font-size:18px;
-      font-weight:500;
-      text-align:center;
+      font-weight:600;
+      color:var(--warm);
+      text-align:right;
+      padding-bottom:8px;
     }
 
-    /* ===== Our Story Section ===== */
+    .pricing-note {
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.6;
+      max-width:60ch;
+    }
+
+    /* Story Section */
     .story-section {
       max-width:var(--container);
       margin:0 auto;
-      padding:80px 28px 100px 28px;
+      padding:80px 32px 100px 32px;
       border-top:1px solid var(--rule);
     }
+
     .story-section h2 {
-      font-family:"Playfair Display", serif;
-      font-size:32px;
-      font-weight:700;
-      margin-bottom:24px;
+      font-family:"Cormorant Garamond", serif;
+      font-size:36px;
+      font-weight:600;
+      margin:0 0 32px 0;
+      color:var(--text);
     }
+
     .story-section p {
       color:var(--muted);
-      font-size:18px;
-      line-height:1.6;
+      font-size:17px;
+      line-height:1.8;
       max-width:75ch;
-      margin-bottom:18px;
+      margin:0 0 20px 0;
     }
 
-    footer {
-      padding:48px 24px;
+    /* CTA Section */
+    .cta-section {
+      max-width:var(--container);
+      margin:0 auto;
+      padding:80px 32px;
+      text-align:center;
+      border-top:1px solid var(--rule);
+    }
+
+    .cta-section h2 {
+      font-family:"Cormorant Garamond", serif;
+      font-size:40px;
+      font-weight:600;
+      margin:0 0 16px 0;
+      color:var(--text);
+    }
+
+    .cta-section p {
       color:var(--muted);
+      font-size:18px;
+      margin:0 0 32px 0;
+      max-width:50ch;
+      margin-left:auto;
+      margin-right:auto;
     }
 
-    /* Prevent auto-styled blue phone links */
+    .cta-btn {
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      background:var(--warm);
+      color:#fff;
+      text-decoration:none;
+      font-size:16px;
+      font-weight:600;
+      padding:16px 36px;
+      border-radius:6px;
+      transition:all 0.25s ease;
+      border:2px solid var(--warm);
+      cursor:pointer;
+      font-family:"DM Sans", sans-serif;
+    }
+
+    .cta-btn:hover {
+      background:transparent;
+      color:var(--warm);
+      transform:translateY(-2px);
+    }
+
+    /* Footer */
+    footer {
+      padding:60px 32px;
+      background:rgba(0,0,0,0.02);
+      border-top:1px solid var(--rule);
+    }
+
+    footer .footer-content {
+      max-width:var(--container);
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    footer .footer-brand {
+      font-weight:600;
+      font-family:"Cormorant Garamond", serif;
+      font-size:24px;
+      color:var(--text);
+    }
+
+    footer .footer-info {
+      color:var(--muted);
+      font-size:15px;
+      white-space:nowrap;
+    }
+
     footer a, footer a:link, footer a:visited {
       color:inherit;
       text-decoration:none;
       pointer-events:none;
-      cursor:default;
     }
 
-    /* ===== MOBILE OPTIMIZATION ===== */
-    @media (max-width:780px) {
-      .content-grid {display:block;}
-      .content-grid::before {display:none;}
-      .left-col, .right-col {padding:0 10px 60px 10px;}
-      .pricing-section, .story-section {padding:40px 20px 80px 20px;}
-      .story-section p {font-size:16px;}
+    /* Responsive */
+    @media (max-width:900px) {
+      .info-grid { grid-template-columns:1fr; gap:40px; }
+      .expect-grid { grid-template-columns:1fr; gap:36px; }
+      .amenities-grid { grid-template-columns:1fr 1fr; }
+      .top-bar, .hero, .expect-section, .amenities-section, .cta-section { padding-left:24px; padding-right:24px; }
+    }
+
+    @media (max-width:600px) {
+      .top-bar { padding:24px 16px 0 16px; flex-direction:column; gap:16px; }
+      .brand { font-size:28px; }
+      .call-btn { font-size:14px; padding:10px 16px; }
+      .hero { padding:40px 16px 60px 16px; min-height:auto; }
+      .hero-h1 { font-size:clamp(36px, 8vw, 48px); }
+      .hero-subtitle { font-size:16px; }
+      .info-grid { margin-top:32px; padding-top:32px; }
+      .expect-section, .amenities-section, .cta-section { padding:60px 16px; }
+      .expect-section h2, .amenities-section h2, .cta-section h2 { font-size:28px; }
+      .expect-grid { gap:24px; }
+      .amenities-grid { grid-template-columns:1fr; }
+      .amenity-card { padding:24px; }
+      footer .footer-content { flex-direction:column; text-align:center; }
     }
   </style>
 </head>
@@ -262,81 +461,118 @@
   <main>
     <div class="top-bar">
       <div class="brand">BodyWorks</div>
-      <a href="tel:7247743165" class="call-btn">Call Now</a>
+      <a href="tel:7247743165" class="call-btn">📞 Call Now</a>
     </div>
 
+    <!-- Hero -->
     <section class="hero">
       <div class="hero-inner">
-        <h1 class="hero-h1">
-          BodyWorks
-          <span class="line2">Massage Therapy</span>
-        </h1>
-
+        <h1 class="hero-h1">Your Body, Your Massage</h1>
         <div class="hero-rule"></div>
+        <p class="hero-subtitle">
+          Every body is different. So is every massage. We listen, customize, and deliver exactly what you need to feel your best.
+        </p>
 
-        <div class="content-grid">
-          <div class="left-col">
-            <h2>Experience true relaxation and restorative care</h2>
-            <div class="inline-rule"></div>
-            <p>At BodyWorks Massage Therapy, we’ve been helping our Beaver community relieve stress, ease pain, and restore balance for nearly three decades. Every session is customized to your body’s needs with professionalism and care.</p>
+        <div class="info-grid">
+          <div class="info-col">
+            <h2>Results-Driven Massage</h2>
+            <p>Whether you want to ease tension, unwind after a stressful week, recover from activity, or just take time for yourself—we've got you covered.</p>
+            <p>Nearly 30 years of hands-on experience. We use hot stones, essential oils, and personalized technique to give you exactly what your body needs right now.</p>
           </div>
 
-          <div class="right-col">
-            <h3>Hours of Operation</h3>
-            <div class="inline-rule"></div>
-            <p>
-              <strong>Monday:</strong> 9 AM–5 PM<br>
-              <strong>Tuesday:</strong> 9 AM–5 PM<br>
-              <strong>Wednesday:</strong> 9 AM–7 PM<br>
-              <strong>Thursday:</strong> 9 AM–5 PM<br>
-              <strong>Friday:</strong> 9 AM–4 PM<br>
-              <strong>Saturday:</strong> 7 AM–2 PM<br>
-              <strong>Sunday:</strong> Closed
-            </p>
-          </div>          
+          <div class="info-col">
+            <h2>Book Your Session</h2>
+            <p>All appointments are tailored to you. Call to schedule.</p>
+            <ul>
+              <li><strong>Phone:</strong> (724) 774-3165</li>
+              <li><strong>Location:</strong> 322 Bridge St, Beaver, PA</li>
+              <li><strong>Flexible scheduling</strong> to fit your life</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="pricing-section">
-      <h2>Massages & Pricing</h2>
-      <div class="pricing-table">
-        <div class="pricing-header">Type</div>
-        <div class="pricing-header">30 min</div>
-        <div class="pricing-header">60 min</div>
-        <div class="pricing-header">90 min</div>
+    <!-- How It Works -->
+    <section class="expect-section">
+      <h2>How It Works</h2>
+      <p class="expect-intro">
+        Every session starts with a conversation. We find out what you need, then deliver it.
+      </p>
 
-        <div>
-          <div class="pricing-type">Swedish Massage</div>
-          <div class="pricing-desc">Gentle, relaxing full-body massage that improves circulation and reduces tension.</div>
+      <div class="expect-grid">
+        <div class="expect-item">
+          <div class="accent-line"></div>
+          <h3>We Talk First</h3>
+          <p>When you come in, we chat about what's going on. Where are you tight? What hurts? Are you looking to relax or work on something specific? It's just a natural conversation.</p>
         </div>
-        <div class="price">$45</div>
-        <div class="price">$80</div>
-        <div class="price">$110</div>
 
-        <div>
-          <div class="pricing-type">Deep Tissue Massage</div>
-          <div class="pricing-desc">Targets deeper layers of muscle to relieve chronic tension and soreness.</div>
+        <div class="expect-item">
+          <div class="accent-line"></div>
+          <h3>We Customize the Massage</h3>
+          <p>Based on what you told us and what we feel as we work, we adjust pressure, technique, and focus. Every body is different, so every massage is different.</p>
         </div>
-        <div class="price">$50</div>
-        <div class="price">$90</div>
-        <div class="price">$125</div>
 
-        <div>
-          <div class="pricing-type">Hot Stone Massage</div>
-          <div class="pricing-desc">Heated stones melt away stress while easing tight muscles and improving circulation.</div>
+        <div class="expect-item">
+          <div class="accent-line"></div>
+          <h3>We Use What Works</h3>
+          <p>Hot stones and essential oils aren't add-ons—they're tools that enhance the massage. We use them when they make sense for what you need that day.</p>
         </div>
-        <div class="price">$55</div>
-        <div class="price">$95</div>
-        <div class="price">$135</div>
 
-        <div>
-          <div class="pricing-type">Prenatal Massage</div>
-          <div class="pricing-desc">Safe and supportive massage for expecting mothers to relieve back and hip discomfort.</div>
+        <div class="expect-item">
+          <div class="accent-line"></div>
+          <h3>You Feel the Difference</h3>
+          <p>One massage? Great. Regular sessions? That's where you really see changes. We'll talk about what works for your schedule and goals.</p>
         </div>
-        <div class="price">$50</div>
-        <div class="price">$85</div>
-        <div class="price">$120</div>
       </div>
+    </section>
+
+    <!-- Amenities / Tools -->
+    <section class="amenities-section">
+      <h2>What We Offer</h2>
+
+      <div class="amenities-grid">
+        <div class="amenity-card">
+          <h3>Hot Stone Therapy</h3>
+          <p>Warm basalt stones melt away tension, boost circulation, and make the massage feel even better. Perfect for deep relaxation.</p>
+        </div>
+
+        <div class="amenity-card">
+          <h3>Essential Oils</h3>
+          <p>Lavender, eucalyptus, and others enhance relaxation and recovery. We choose what complements your session—or skip them if you prefer.</p>
+        </div>
+
+        <div class="amenity-card">
+          <h3>Nearly 30 Years of Skill</h3>
+          <p>Experience matters. We know how bodies move, what creates tension, and how to address it. That knowledge goes into every session.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing-section">
+      <h2>Pricing</h2>
+      <div class="pricing-table">
+        <div class="pricing-header">Session Length</div>
+        <div class="pricing-header">Price</div>
+
+        <div class="pricing-type">30 Minutes</div>
+        <div class="price">$45</div>
+
+        <div class="pricing-type">60 Minutes</div>
+        <div class="price">$80</div>
+
+        <div class="pricing-type">90 Minutes</div>
+        <div class="price">$110</div>
+      </div>
+      <p class="pricing-note">Sessions include consultation and customization. Hot stones and essential oils available upon request.</p>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <h2>Time for a Massage?</h2>
+      <p>Whether it's been weeks or years, your body will thank you. Book an appointment today—it's easier than you think.</p>
+      <a href="tel:7247743165" class="cta-btn">Call (724) 774-3165</a>
     </section>
 
     <!-- OUR STORY -->
@@ -347,13 +583,12 @@
       <p>From the moment you step into our calm and welcoming space, you are not just a client—you are part of our family. We cherish the relationships we've built and are honored to have witnessed multiple generations of families walk through our doors. Our longevity is a testament to the loyalty of our clients and our unwavering commitment to their well-being. We invite you to experience the difference that 29 years of passion and expertise can make.</p>
     </section>
 
+    <!-- Footer -->
     <footer>
-      <div style="max-width:var(--container); margin:0 auto; padding:0 28px;">
-        <div style="display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap;">
-          <div style="font-weight:600; font-family:Inter, sans-serif;">BodyWorks Massage Therapy</div>
-          <div style="color:var(--muted); white-space:nowrap;">
-            322&nbsp;Bridge&nbsp;St,&nbsp;Beaver,&nbsp;PA&nbsp;•&nbsp;(724)&nbsp;774-3165
-          </div>
+      <div class="footer-content">
+        <div class="footer-brand">BodyWorks</div>
+        <div class="footer-info">
+          322 Bridge St, Beaver, PA • (724) 774-3165
         </div>
       </div>
     </footer>
